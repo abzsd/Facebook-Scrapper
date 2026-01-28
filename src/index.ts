@@ -25,3 +25,7 @@ connectDB().then(() => {
     console.log(`Backend server running on http://localhost:${PORT}`);
   });
 });
+
+app.use(cors({
+  origin: ['http://localhost:5173', 'https://facebook-scrapper-fe.vercel.app/']
+}));
