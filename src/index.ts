@@ -9,7 +9,14 @@ import postsRouter from "./routes/posts";
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-app.use(cors({ origin: "http://localhost:3000" }));
+// CORS - allow frontend origins (no trailing slashes)
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'http://localhost:5173',
+    'https://facebook-scrapper-fe.vercel.app'
+  ]
+}));
 app.use(express.json());
 
 app.use("/api/scrape", scrapeRouter);
@@ -25,7 +32,3 @@ connectDB().then(() => {
     console.log(`Backend server running on http://localhost:${PORT}`);
   });
 });
-
-app.use(cors({
-  origin: ['http://localhost:5173', 'https://facebook-scrapper-fe.vercel.app/']
-}));
